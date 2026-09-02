@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Courier Tracking & Delivery Route Management Platform</title>
+  
+  <!-- Google Fonts & Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- External Libraries (CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- =====================================================================
+       1. SPLIT-SCREEN AUTHENTICATION (LOGIN & REGISTER)
+       ===================================================================== -->
+  <div id="auth-container" class="auth-container">
+    <!-- Left Hero Pane -->
+    <div class="auth-hero-pane">
+      <canvas id="auth-particles-canvas" class="auth-canvas-bg"></canvas>
+      
+      <div class="auth-brand">
+        <div class="brand-icon-box">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <span class="brand-title">PULSE LOGISTICS</span>
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-tag">
+          <span class="status-dot" style="background:#00F0FF;box-shadow:0 0 8px #00F0FF;"></span>
+          Next-Gen Autonomous Mesh 2.0
+        </div>
+        <h1 class="hero-headline">
+          Smart Courier Tracking & <span>Route Management</span>
+        </h1>
+        <p class="hero-desc">
+          Intelligent real-time logistics orchestration. Monitor live fleets, simulate 3D city dispatch trajectories, and optimize parcel routes with sub-second precision.
+        </p>
+
+        <div class="hero-feature-grid">
+          <div class="feature-pill">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+            <span>3D Interactive Route Mesh</span>
+          </div>
+          <div class="feature-pill">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <span>JWT Role Protection</span>
+          </div>
+          <div class="feature-pill">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <span>Sub-second Tracking ID</span>
+          </div>
+          <div class="feature-pill">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            <span>Fleet Telemetry & Roster</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-footer">
+        © 2026 Pulse Logistics Global Systems. Java 17 • Spring Boot 3 • Three.js Engine.
+      </div>
+    </div>
+
+    <!-- Right Glassmorphism Login / Register Form Pane -->
+    <div class="auth-form-pane">
+      
+      <!-- Login Card -->
+      <div id="auth-login-card" class="glass-panel auth-card">
+        <div class="auth-header">
+          <h2>Secure Portal Login</h2>
+          <p>Access your enterprise logistics console</p>
+        </div>
+
+        <form id="login-form">
+          <!-- Role Selector -->
+          <div class="input-group">
+            <label class="input-label">Select Account Role</label>
+            <div class="role-selector-group">
+              <button type="button" class="role-btn active" data-role="ROLE_ADMIN">Admin</button>
+              <button type="button" class="role-btn" data-role="ROLE_DRIVER">Driver</button>
+              <button type="button" class="role-btn" data-role="ROLE_CUSTOMER">Customer</button>
+            </div>
+            <input type="hidden" id="login-role-input" value="ROLE_ADMIN">
+          </div>
+
+          <div class="input-group">
+            <label class="input-label" for="login-email">Username or Email</label>
+            <input type="text" id="login-email" class="input-field" placeholder="e.g. admin@courier.com" value="admin@courier.com" required>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label" for="login-password">Password</label>
+            <input type="password" id="login-password" class="input-field" placeholder="••••••••" value="admin123" required>
+          </div>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;font-size:0.85rem;">
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer;color:var(--text-muted);">
+              <input type="checkbox" checked style="accent-color:var(--accent-cyan);"> Remember me
+            </label>
+            <a href="#" onclick="alert('Demo reset instructions sent to your terminal/email.'); return false;">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width:100%;">
+            <span>Authenticate & Launch Console</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </form>
+
+        <!-- Quick 1-Click Demo Accounts -->
+        <div class="demo-credentials-box">
+          <div class="demo-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            Instant 1-Click Demo Switcher
+          </div>
+          <div class="demo-quick-buttons">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="window.demoLogin('admin')">👑 Admin</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="window.demoLogin('driver')">🚚 Driver</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="window.demoLogin('customer')">📦 Customer</button>
+          </div>
+        </div>
+
+        <div style="margin-top:20px;text-align:center;font-size:0.85rem;color:var(--text-muted);">
+          Don't have an account? <a href="#" id="link-to-register">Register new profile</a>
+        </div>
+      </div>
+
+      <!-- Register Card (Hidden by default) -->
+      <div id="auth-register-card" class="glass-panel auth-card" style="display:none;">
+        <div class="auth-header">
+          <h2>Create New Account</h2>
+          <p>Join the Pulse Logistics network</p>
+        </div>
+
+        <form id="register-form">
+          <div class="input-group">
+            <label class="input-label" for="reg-username">Username</label>
+            <input type="text" id="reg-username" class="input-field" placeholder="username" required>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label" for="reg-email">Email Address</label>
+            <input type="email" id="reg-email" class="input-field" placeholder="user@domain.com" required>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label" for="reg-fullname">Full Name</label>
+            <input type="text" id="reg-fullname" class="input-field" placeholder="John Doe" required>
+          </div>
+
+          <div class="modal-grid-2">
+            <div class="input-group">
+              <label class="input-label" for="reg-role">Role</label>
+              <select id="reg-role" class="select-field">
+                <option value="ROLE_CUSTOMER">Customer</option>
+                <option value="ROLE_DRIVER">Driver / Courier</option>
+                <option value="ROLE_ADMIN">Administrator</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="reg-phone">Phone</label>
+              <input type="text" id="reg-phone" class="input-field" placeholder="+1-555-0100">
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label" for="reg-password">Password</label>
+            <input type="password" id="reg-password" class="input-field" placeholder="Minimum 6 characters" required>
+          </div>
+
+          <button type="submit" class="btn btn-emerald" style="width:100%;margin-top:10px;">
+            <span>Register & Initialize</span>
+          </button>
+        </form>
+
+        <div style="margin-top:20px;text-align:center;font-size:0.85rem;color:var(--text-muted);">
+          Already have an account? <a href="#" id="link-to-login">Sign in</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       2. MAIN APPLICATION WORKSPACE
+       ===================================================================== -->
+  <div id="app-container">
+
+    <!-- Top Navigation Bar -->
+    <header class="app-navbar">
+      <div class="nav-left">
+        <div class="nav-brand" onclick="window.app.switchView('dashboard')">
+          <div class="brand-icon-box" style="width:36px;height:36px;border-radius:10px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </div>
+          <span class="brand-title" style="font-size:1.2rem;">PULSE LOGISTICS</span>
+        </div>
+
+        <nav class="nav-links">
+          <!-- Admin View Tabs -->
+          <div class="nav-link active admin-nav-item" data-view="dashboard">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            <span>Dashboard</span>
+          </div>
+          <div class="nav-link admin-nav-item" data-view="shipments">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+            <span>Shipments</span>
+          </div>
+          <div class="nav-link admin-nav-item" data-view="routes-3d">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+            <span>3D Route Engine</span>
+          </div>
+          <div class="nav-link admin-nav-item" data-view="couriers">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <span>Couriers Roster</span>
+          </div>
+
+          <!-- Customer View Tab -->
+          <div class="nav-link customer-nav-item" data-view="customer-tracker" style="display:none;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <span>Track My Parcel</span>
+          </div>
+
+          <!-- Driver View Tab -->
+          <div class="nav-link driver-nav-item" data-view="driver-console" style="display:none;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+            <span>Driver Deliveries Queue</span>
+          </div>
+        </nav>
+      </div>
+
+      <div class="nav-right">
+        <!-- API Connection status -->
+        <div id="api-status-indicator" class="api-status-badge">
+          <span class="status-dot"></span>
+          <span>Local Simulation Mode</span>
+        </div>
+
+        <!-- Quick Switch Role Select -->
+        <select id="role-switcher-select" class="select-field" style="padding:6px 12px;font-size:0.8rem;width:auto;">
+          <option value="ROLE_ADMIN">View as Admin</option>
+          <option value="ROLE_DRIVER">View as Driver</option>
+          <option value="ROLE_CUSTOMER">View as Customer</option>
+        </select>
+
+        <!-- New Shipment Quick Button (Admin only) -->
+        <button id="btn-open-new-shipment-modal" class="btn btn-primary btn-sm admin-nav-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <span>+ New Shipment</span>
+        </button>
+
+        <!-- User Profile Pill -->
+        <div class="user-profile-menu">
+          <div id="nav-user-avatar" class="user-avatar">SJ</div>
+          <div class="user-info-text">
+            <span id="nav-user-name" class="user-info-name">Sarah Jenkins</span>
+            <span id="nav-user-role" class="user-info-role">ADMIN</span>
+          </div>
+          <button id="nav-logout-btn" class="btn-icon" style="background:transparent;border:none;color:var(--text-muted);cursor:pointer;" title="Sign Out">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Workspace Content -->
+    <main class="main-content">
+
+      <!-- ===================================================================
+           VIEW 1: ADMIN ROLE-BASED DASHBOARD
+           =================================================================== -->
+      <section id="view-dashboard" class="view-section active">
+        <div class="view-header">
+          <div class="view-title-group">
+            <h1>Logistics Operations Control</h1>
+            <p>Real-time fleet telemetry, delivery volume analysis, and system activity stream</p>
+          </div>
+          <div>
+            <button class="btn btn-secondary btn-sm" onclick="window.app.loadDashboardData()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+              <span>Refresh Metrics</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Top Stat Cards -->
+        <div class="stats-grid">
+          <div class="glass-panel glass-panel-hover stat-card">
+            <div class="stat-card-header">
+              <span class="stat-title">Total Shipments</span>
+              <div class="stat-icon" style="background:rgba(0,240,255,0.12);color:var(--accent-cyan);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+              </div>
+            </div>
+            <div id="stat-total-shipments" class="stat-value" style="color:#FFFFFF;">0</div>
+            <div class="stat-trend positive">
+              <span>↑ 14.2%</span>
+              <span style="color:var(--text-dim);">vs last week</span>
+            </div>
+          </div>
+
+          <div class="glass-panel glass-panel-hover stat-card">
+            <div class="stat-card-header">
+              <span class="stat-title">In Transit</span>
+              <div class="stat-icon" style="background:rgba(0,240,255,0.18);color:var(--accent-cyan);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+              </div>
+            </div>
+            <div id="stat-in-transit" class="stat-value" style="color:var(--accent-cyan);">0</div>
+            <div class="stat-trend positive">
+              <span class="status-dot" style="background:#00F0FF;"></span>
+              <span style="color:var(--text-dim);">Active deliveries on road</span>
+            </div>
+          </div>
+
+          <div class="glass-panel glass-panel-hover stat-card">
+            <div class="stat-card-header">
+              <span class="stat-title">Delivered Today</span>
+              <div class="stat-icon" style="background:rgba(16,185,129,0.15);color:var(--accent-emerald);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              </div>
+            </div>
+            <div id="stat-delivered-today" class="stat-value" style="color:var(--accent-emerald);">0</div>
+            <div class="stat-trend positive">
+              <span>98.6% On-time SLA rate</span>
+            </div>
+          </div>
+
+          <div class="glass-panel glass-panel-hover stat-card">
+            <div class="stat-card-header">
+              <span class="stat-title">Active Couriers</span>
+              <div class="stat-icon" style="background:rgba(139,92,246,0.15);color:var(--accent-purple);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+              </div>
+            </div>
+            <div id="stat-active-couriers" class="stat-value" style="color:#A78BFA;">0</div>
+            <div class="stat-trend neutral">
+              <span style="color:var(--text-dim);">Assigned across 3 route meshes</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts & Live Feed Section -->
+        <div class="dashboard-main-grid">
+          <!-- Weekly Delivery Chart -->
+          <div class="glass-panel chart-card">
+            <div class="chart-header">
+              <div>
+                <h3>Weekly Delivery Volume & SLA</h3>
+                <p style="font-size:0.8rem;color:var(--text-muted);">Completed deliveries vs delayed shipments</p>
+              </div>
+              <span class="status-pill status-delivered">Live Telemetry</span>
+            </div>
+            <div class="chart-wrapper">
+              <canvas id="weekly-volume-chart"></canvas>
+            </div>
+          </div>
+
+          <!-- Status Doughnut Chart -->
+          <div class="glass-panel chart-card">
+            <div class="chart-header">
+              <div>
+                <h3>Status Distribution</h3>
+                <p style="font-size:0.8rem;color:var(--text-muted);">Real-time shipment proportion</p>
+              </div>
+            </div>
+            <div class="chart-wrapper">
+              <canvas id="status-dist-chart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Activity Stream -->
+        <div class="glass-panel activity-card">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span class="status-dot" style="background:#00F0FF;animation:pulseDot 1.5s infinite;"></span>
+              <h3>Live Activity Feed</h3>
+            </div>
+            <span style="font-size:0.75rem;color:var(--text-dim);">Auto-updates via dispatch events</span>
+          </div>
+          <div id="dashboard-activity-feed" class="activity-list">
+            <!-- Populated by JavaScript -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VIEW 2: SHIPMENT MANAGEMENT MODULE
+           =================================================================== -->
+      <section id="view-shipments" class="view-section">
+        <div class="view-header">
+          <div class="view-title-group">
+            <h1>Shipment Management</h1>
+            <p>Track, dispatch, filter and update parcels across all active hubs</p>
+          </div>
+          <button class="btn btn-primary" onclick="document.getElementById('new-shipment-modal').classList.add('open')">
+            <span>+ New Shipment</span>
+          </button>
+        </div>
+
+        <!-- Filter & Search Bar -->
+        <div class="table-controls">
+          <div class="search-input-wrapper">
+            <svg class="search-icon-pos" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="shipment-search-input" class="input-field" placeholder="Search by Tracking ID, Sender, Receiver or Destination...">
+          </div>
+
+          <div class="filter-group">
+            <select id="shipment-status-filter" class="select-field" style="width:180px;">
+              <option value="ALL">All Statuses</option>
+              <option value="PENDING">Pending</option>
+              <option value="IN_TRANSIT">In Transit</option>
+              <option value="DELIVERED">Delivered</option>
+              <option value="DELAYED">Delayed</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Shipments Data Table -->
+        <div class="glass-panel data-table-card">
+          <div class="table-responsive">
+            <table class="custom-table">
+              <thead>
+                <tr>
+                  <th>Tracking ID</th>
+                  <th>Sender</th>
+                  <th>Receiver & Dest</th>
+                  <th>Assigned Courier</th>
+                  <th>Priority</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="shipments-table-body">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VIEW 3: 3D ROUTE OPTIMIZATION MODULE (CENTERPIECE)
+           =================================================================== -->
+      <section id="view-routes-3d" class="view-section">
+        <div class="view-header">
+          <div class="view-title-group">
+            <h1>3D Route Optimization Engine</h1>
+            <p>Interactive spatial city simulation with glowing 3D spline routes, camera fly-to, and waypoint shortest-path computing</p>
+          </div>
+          <div style="display:flex;gap:10px;">
+            <button class="btn btn-secondary btn-sm" onclick="window.app.load3DRouteScene()">
+              🔄 Reload Mesh
+            </button>
+          </div>
+        </div>
+
+        <div class="route-module-layout">
+          <!-- 3D Three.js Viewport -->
+          <div class="map-viewport-container">
+            <div id="three-canvas-container"></div>
+
+            <!-- Map HUD Overlay -->
+            <div class="map-hud-overlay">
+              <div class="map-hud-pill">
+                <span class="status-dot" style="background:#00F0FF;box-shadow:0 0 8px #00F0FF;"></span>
+                <span>METRO CORE DISPATCH MESH</span>
+              </div>
+              <div class="map-hud-pill">
+                <span style="color:#A78BFA;">3 Active Corridors</span>
+              </div>
+            </div>
+
+            <!-- Map Interactive Controls Overlay -->
+            <div class="map-controls-overlay">
+              <button id="map-btn-auto-rotate" class="map-ctrl-btn" title="Toggle Auto-Orbit Rotation" style="color:var(--accent-cyan);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+              </button>
+              <button id="map-btn-reset-cam" class="map-ctrl-btn" title="Reset Camera View">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="12 8 8 12 12 16 12 8"></polygon></svg>
+              </button>
+              <button id="map-btn-theme" class="map-ctrl-btn" title="Toggle Cyberpunk / Night Light">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Routes List & Optimization Panel -->
+          <div class="routes-list-panel">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <h3 style="font-size:1.1rem;">Active Route Corridors</h3>
+              <span style="font-size:0.75rem;color:var(--text-muted);">Click to fly-to</span>
+            </div>
+
+            <div id="routes-list-container" style="display:flex;flex-direction:column;gap:14px;overflow-y:auto;max-height:600px;">
+              <!-- Populated by JavaScript -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VIEW 4: DELIVERY & COURIER ROSTER MODULE
+           =================================================================== -->
+      <section id="view-couriers" class="view-section">
+        <div class="view-header">
+          <div class="view-title-group">
+            <h1>Courier Fleet & Delivery Roster</h1>
+            <p>Active driver telemetry, vehicle tracking, ratings, and shift management</p>
+          </div>
+          <button id="btn-open-add-courier-modal" class="btn btn-primary">
+            <span>+ Add Courier</span>
+          </button>
+        </div>
+
+        <div id="couriers-roster-grid" class="couriers-grid">
+          <!-- Populated dynamically -->
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VIEW 5: CUSTOMER TRACKING PORTAL
+           =================================================================== -->
+      <section id="view-customer-tracker" class="view-section">
+        <div class="tracking-portal-layout">
+          
+          <div class="glass-panel tracking-search-hero">
+            <div class="hero-tag">
+              <span class="status-dot" style="background:#00F0FF;"></span>
+              Customer Tracking Terminal
+            </div>
+            <h2>Track Your Shipment</h2>
+            <p style="color:var(--text-muted);font-size:0.95rem;">Enter your parcel tracking ID to view live milestone status and estimated time of arrival</p>
+
+            <form id="customer-tracking-form" class="tracking-search-form">
+              <input type="text" id="customer-tracking-input" class="input-field" placeholder="e.g. TRK-2026-8821" value="TRK-2026-8821" required>
+              <button type="submit" class="btn btn-primary">
+                <span>Track Parcel</span>
+              </button>
+            </form>
+
+            <div class="tracking-sample-tags">
+              <span>Quick demo samples:</span>
+              <span class="sample-tag" onclick="window.app.trackCustomerParcel('TRK-2026-8821')">TRK-2026-8821</span>
+              <span>•</span>
+              <span class="sample-tag" onclick="window.app.trackCustomerParcel('TRK-2026-9042')">TRK-2026-9042</span>
+              <span>•</span>
+              <span class="sample-tag" onclick="window.app.trackCustomerParcel('TRK-2026-7731')">TRK-2026-7731</span>
+            </div>
+          </div>
+
+          <!-- Tracking Results Card -->
+          <div id="customer-tracking-results" class="glass-panel" style="padding:32px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px;">
+              <div>
+                <span style="font-size:0.8rem;color:var(--text-dim);text-transform:uppercase;">Tracking ID</span>
+                <h2 id="track-res-tracking-id" style="font-family:var(--font-mono);color:var(--accent-cyan);">TRK-2026-8821</h2>
+              </div>
+              <span id="track-res-status-pill" class="status-pill status-in-transit">In Transit</span>
+            </div>
+
+            <!-- Visual Milestone Stepper -->
+            <div class="milestone-stepper">
+              <div class="stepper-line">
+                <div id="stepper-progress-bar" class="stepper-progress"></div>
+              </div>
+
+              <div class="step-node completed">
+                <div class="step-icon-circle">📦</div>
+                <div class="step-label">Order Placed</div>
+              </div>
+              <div class="step-node completed">
+                <div class="step-icon-circle">🚚</div>
+                <div class="step-label">Picked Up</div>
+              </div>
+              <div class="step-node active">
+                <div class="step-icon-circle">⚡</div>
+                <div class="step-label">In Transit</div>
+              </div>
+              <div class="step-node">
+                <div class="step-icon-circle">📍</div>
+                <div class="step-label">Out for Delivery</div>
+              </div>
+              <div class="step-node">
+                <div class="step-icon-circle">✅</div>
+                <div class="step-label">Delivered</div>
+              </div>
+            </div>
+
+            <!-- Parcel Metadata Grid -->
+            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:16px;background:rgba(0,0,0,0.3);padding:20px;border-radius:12px;margin-top:28px;">
+              <div>
+                <div style="font-size:0.75rem;color:var(--text-dim);text-transform:uppercase;">Sender</div>
+                <div id="track-res-sender" style="font-weight:700;color:#FFFFFF;">Apex Quantum Labs</div>
+              </div>
+              <div>
+                <div style="font-size:0.75rem;color:var(--text-dim);text-transform:uppercase;">Receiver</div>
+                <div id="track-res-receiver" style="font-weight:700;color:#FFFFFF;">Alex Mercer</div>
+              </div>
+              <div>
+                <div style="font-size:0.75rem;color:var(--text-dim);text-transform:uppercase;">Destination</div>
+                <div id="track-res-destination" style="font-weight:700;color:#FFFFFF;">Hudson Yards Tower 104</div>
+              </div>
+              <div>
+                <div style="font-size:0.75rem;color:var(--text-dim);text-transform:uppercase;">Assigned Courier</div>
+                <div id="track-res-courier" style="font-weight:700;color:var(--accent-cyan);">Marcus Vance</div>
+                <div id="track-res-vehicle" style="font-size:0.72rem;color:var(--text-dim);font-family:var(--font-mono);">EV-SPRINT-409</div>
+              </div>
+              <div>
+                <div style="font-size:0.75rem;color:var(--text-dim);text-transform:uppercase;">Estimated Arrival</div>
+                <div id="track-res-eta" style="font-weight:700;color:var(--accent-emerald);">Today, 14:30 EST</div>
+              </div>
+            </div>
+
+            <div style="margin-top:20px;display:flex;justify-content:flex-end;">
+              <button class="btn btn-outline-cyan btn-sm" onclick="window.app.switchView('routes-3d')">
+                🗺️ View 3D Route Corridor
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VIEW 6: DRIVER TASK CONSOLE
+           =================================================================== -->
+      <section id="view-driver-console" class="view-section">
+        <div class="view-header">
+          <div class="view-title-group">
+            <h1>Driver Delivery Console</h1>
+            <p>Assigned parcels queue, route waypoints, and instant status updates</p>
+          </div>
+          <div>
+            <span class="status-pill status-on-route">
+              <span class="status-dot"></span>
+              On Active Shift
+            </span>
+          </div>
+        </div>
+
+        <div class="driver-console-layout">
+          <!-- Deliveries Task List -->
+          <div>
+            <h3 style="margin-bottom:16px;">Assigned Parcels Queue</h3>
+            <div id="driver-tasks-list" class="driver-deliveries-list">
+              <!-- Populated by JavaScript -->
+            </div>
+          </div>
+
+          <!-- Driver Profile & Shift Stats -->
+          <div class="glass-panel" style="padding:24px;display:flex;flex-direction:column;gap:18px;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div class="courier-avatar-large">MV</div>
+              <div>
+                <h3>Marcus Vance</h3>
+                <div style="font-size:0.8rem;color:var(--text-muted);">Vehicle: EV-SPRINT-409</div>
+              </div>
+            </div>
+
+            <div style="background:rgba(0,0,0,0.3);padding:14px;border-radius:10px;display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:center;">
+              <div>
+                <div style="font-size:1.3rem;font-weight:800;color:#FBBF24;">⭐ 4.9</div>
+                <div style="font-size:0.7rem;color:var(--text-dim);">Courier Rating</div>
+              </div>
+              <div>
+                <div style="font-size:1.3rem;font-weight:800;color:var(--accent-emerald);">142</div>
+                <div style="font-size:0.7rem;color:var(--text-dim);">Trips Completed</div>
+              </div>
+            </div>
+
+            <div>
+              <div style="font-size:0.8rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;margin-bottom:8px;">Current Assigned Route</div>
+              <div style="background:rgba(0,240,255,0.06);border:1px solid rgba(0,240,255,0.2);padding:12px;border-radius:8px;">
+                <div style="font-family:var(--font-mono);font-weight:700;color:var(--accent-cyan);">RT-METRO-ALPHA</div>
+                <div style="font-size:0.78rem;color:#E2E8F0;margin-top:4px;">Central Depot Alpha → Skyline Financial Center</div>
+              </div>
+            </div>
+
+            <button class="btn btn-outline-cyan btn-sm" style="width:100%;" onclick="window.app.switchView('routes-3d')">
+              🗺️ Open 3D Navigation Map
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- =====================================================================
+       3. MODALS
+       ===================================================================== -->
+  
+  <!-- "New Shipment" Modal -->
+  <div id="new-shipment-modal" class="modal-overlay">
+    <div class="glass-panel modal-dialog">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div class="brand-icon-box" style="width:32px;height:32px;border-radius:8px;">📦</div>
+          <h2>Create New Shipment</h2>
+        </div>
+        <button class="modal-close">&times;</button>
+      </div>
+
+      <form id="new-shipment-form">
+        <!-- Auto Generated Tracking ID -->
+        <div class="input-group">
+          <label class="input-label" for="new-shipment-tracking-id">Tracking ID (Auto-Generated)</label>
+          <div style="display:flex;gap:8px;">
+            <input type="text" id="new-shipment-tracking-id" class="input-field" style="font-family:var(--font-mono);color:var(--accent-cyan);font-weight:700;" readonly>
+            <button type="button" id="btn-regenerate-tracking-id" class="btn btn-secondary btn-sm" title="Generate New ID">🔄</button>
+          </div>
+        </div>
+
+        <div class="modal-grid-2">
+          <div class="input-group">
+            <label class="input-label" for="new-shipment-sender-name">Sender Name</label>
+            <input type="text" id="new-shipment-sender-name" class="input-field" placeholder="e.g. Apex Quantum Labs" required>
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="new-shipment-receiver-name">Receiver Name</label>
+            <input type="text" id="new-shipment-receiver-name" class="input-field" placeholder="e.g. Alex Mercer" required>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="new-shipment-sender-addr">Sender Origin Address</label>
+          <input type="text" id="new-shipment-sender-addr" class="input-field" placeholder="742 Cyber Blvd, Innovation Park" required>
+        </div>
+
+        <div class="modal-grid-2">
+          <div class="input-group">
+            <label class="input-label" for="new-shipment-dest-name">Destination Landmark / Hub</label>
+            <input type="text" id="new-shipment-dest-name" class="input-field" placeholder="Hudson Yards Tower 104" required>
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="new-shipment-receiver-addr">Receiver Street Address</label>
+            <input type="text" id="new-shipment-receiver-addr" class="input-field" placeholder="104 Hudson Yards, Penthouse 4" required>
+          </div>
+        </div>
+
+        <div class="modal-grid-2">
+          <div class="input-group">
+            <label class="input-label" for="new-shipment-weight">Weight (kg)</label>
+            <input type="number" id="new-shipment-weight" class="input-field" step="0.1" value="2.5" required>
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="new-shipment-priority">Priority Level</label>
+            <select id="new-shipment-priority" class="select-field">
+              <option value="STANDARD">Standard Priority</option>
+              <option value="EXPRESS" selected>Express Courier</option>
+              <option value="OVERNIGHT">Overnight High-Priority</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="new-shipment-driver">Assign Courier Agent</label>
+          <select id="new-shipment-driver" class="select-field">
+            <!-- Populated dynamically -->
+          </select>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-top:24px;justify-content:flex-end;">
+          <button type="button" class="btn btn-secondary modal-close">Cancel</button>
+          <button type="submit" class="btn btn-primary">Dispatch Shipment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- "Add Courier" Modal -->
+  <div id="add-courier-modal" class="modal-overlay">
+    <div class="glass-panel modal-dialog">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div class="brand-icon-box" style="width:32px;height:32px;border-radius:8px;">🚚</div>
+          <h2>Add New Courier</h2>
+        </div>
+        <button class="modal-close">&times;</button>
+      </div>
+
+      <form id="add-courier-form">
+        <div class="modal-grid-2">
+          <div class="input-group">
+            <label class="input-label" for="new-courier-name">Full Name</label>
+            <input type="text" id="new-courier-name" class="input-field" placeholder="e.g. Leo Cruz" required>
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="new-courier-email">Email Address</label>
+            <input type="email" id="new-courier-email" class="input-field" placeholder="cruz@courier.com" required>
+          </div>
+        </div>
+
+        <div class="modal-grid-2">
+          <div class="input-group">
+            <label class="input-label" for="new-courier-phone">Contact Phone</label>
+            <input type="text" id="new-courier-phone" class="input-field" placeholder="+1-555-0188" required>
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="new-courier-vehicle-no">Vehicle Number</label>
+            <input type="text" id="new-courier-vehicle-no" class="input-field" placeholder="EV-NYC-502" required>
+          </div>
+        </div>
+
+        <div class="modal-grid-2">
+          <div class="input-group">
+            <label class="input-label" for="new-courier-vehicle-type">Vehicle Type</label>
+            <select id="new-courier-vehicle-type" class="select-field">
+              <option value="Electric Van (Ford E-Transit)">Electric Van (Ford E-Transit)</option>
+              <option value="Rapid Cargo Bike (Urban Pro)">Rapid Cargo Bike (Urban Pro)</option>
+              <option value="Heavy Duty Van (Mercedes Sprinter)">Heavy Duty Van (Mercedes Sprinter)</option>
+              <option value="Compact Electric Carrier (Nissan e-NV200)">Compact Electric Carrier (Nissan e-NV200)</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label class="input-label" for="new-courier-zone">Operating Zone</label>
+            <input type="text" id="new-courier-zone" class="input-field" placeholder="Downtown & Financial Arc" required>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-top:24px;justify-content:flex-end;">
+          <button type="button" class="btn btn-secondary modal-close">Cancel</button>
+          <button type="submit" class="btn btn-emerald">Enroll Courier</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Application Scripts -->
+  <script src="js/data-store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/route-map-3d.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- Login Background Animation -->
+  <script>
+    (function() {
+      const canvas = document.getElementById('auth-particles-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w, h, particles = [];
+
+      function resize() {
+        w = canvas.width = canvas.parentElement.clientWidth;
+        h = canvas.height = canvas.parentElement.clientHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      for (let i = 0; i < 45; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.6,
+          vy: (Math.random() - 0.5) * 0.6,
+          r: Math.random() * 2 + 1,
+          color: Math.random() > 0.5 ? 'rgba(0,240,255,' : 'rgba(139,92,246,'
+        });
+      }
+
+      function render() {
+        ctx.clearRect(0, 0, w, h);
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0) p.x = w;
+          if (p.x > w) p.x = 0;
+          if (p.y < 0) p.y = h;
+          if (p.y > h) p.y = 0;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = p.color + '0.7)';
+          ctx.fill();
+
+          for (let j = i + 1; j < particles.length; j++) {
+            const p2 = particles[j];
+            const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+            if (dist < 120) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = `rgba(0, 240, 255, ${0.25 * (1 - dist / 120)})`;
+              ctx.lineWidth = 0.8;
+              ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(render);
+      }
+      render();
+    })();
+  </script>
+</body>
+</html>
